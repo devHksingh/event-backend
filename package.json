@@ -1,0 +1,23 @@
+{
+  "name": "event_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "run": "nodemon src/index.ts",
+    "format:fix": "npx prettier . --write",
+    "format:check":"npx prettier . --check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "Backend for display location wise event ",
+  "devDependencies": {
+    "@types/node": "^22.15.23",
+    "nodemon": "^3.1.10",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.3"
+  }
+}
