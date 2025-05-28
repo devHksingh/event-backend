@@ -15,6 +15,9 @@ coverage
 **/.git
 **/.svn
 **/.hg
+package.json
+package-lock.json
+tsconfig.json
 
 generators
 coverage
