@@ -1,11 +1,12 @@
 {
   "name": "event_backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/server.js",
+  "type": "module",
   "scripts": {
     "build": "tsc -p .",
-    "start": "node dist/index.js",
-    "run": "nodemon src/index.ts",
+    "start": "node dist/src/server.js",
+    "dev": "nodemon --exec tsx src/server.ts",
     "format:fix": "npx prettier . --write",
     "format:check": "npx prettier . --check",
     "prepare": "husky"
@@ -13,19 +14,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "description": "Backend for display location wise event ",
   "devDependencies": {
-    "@types/node": "^22.15.23",
+    "@types/node": "^22.15.24",
+    "dotenv": "^16.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "nodemon": "^3.1.10",
     "prettier": "3.5.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
-    "lint-staged": {
-    "*.ts": ["npm run format:fix"]
-    
+  "lint-staged": {
+    "*.ts": [
+      "npm run format:fix"
+    ]
   }
-  
 }
