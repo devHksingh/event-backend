@@ -8,6 +8,7 @@ import { HttpError } from "http-errors";
 import cors from "cors";
 import { Config } from "./config";
 import rateLimit from "express-rate-limit";
+import eventRoute from "./event/eventRouter";
 
 const app = express();
 
@@ -31,7 +32,9 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to sever.");
 });
 
-app.use("/", limiter);
+app.use("/api/v1/events", limiter);
+
+app.use("/api/v1/events", eventRoute);
 
 // global error handler
 app.use(
