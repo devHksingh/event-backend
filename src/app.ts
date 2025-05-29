@@ -7,6 +7,7 @@ import logger from "./config/logger";
 import { HttpError } from "http-errors";
 import cors from "cors";
 import { Config } from "./config";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -18,9 +19,19 @@ app.use(
     }),
 );
 
+// handeling global rate limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 mins
+    limit: 10,
+    message:
+        "Too many request from this IP ,please try later.Only 10 request per 15 min are allowed",
+});
+
 app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to sever.");
 });
+
+app.use("/", limiter);
 
 // global error handler
 app.use(

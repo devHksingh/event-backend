@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
     "http-errors": "^2.0.0",
     "winston": "^3.17.0"
   }
