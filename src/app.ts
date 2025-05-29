@@ -11,7 +11,8 @@ import rateLimit from "express-rate-limit";
 import eventRoute from "./event/eventRouter";
 
 const app = express();
-
+app.use(express.json({ limit: "4kb" }));
+app.use(express.urlencoded({ extended: true }));
 // setup cors policy
 app.use(
     cors({
