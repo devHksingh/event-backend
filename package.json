@@ -16,10 +16,12 @@
   "license": "ISC",
   "description": "Backend for display location wise event ",
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/http-errors": "^2.0.4",
     "@types/node": "^22.15.24",
     "@types/winston": "^2.4.4",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",

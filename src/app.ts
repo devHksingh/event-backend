@@ -5,8 +5,18 @@ import express, {
 } from "express";
 import logger from "./config/logger";
 import { HttpError } from "http-errors";
+import cors from "cors";
+import { Config } from "./config";
 
 const app = express();
+
+// setup cors policy
+app.use(
+    cors({
+        origin: Config.FRONTEND_DOMAIN,
+        credentials: true,
+    }),
+);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to sever.");
