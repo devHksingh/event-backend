@@ -1,8 +1,4 @@
-import express, {
-    NextFunction,
-    Request,
-    Response,
-} from "express";
+import express, { NextFunction, Request, Response } from "express";
 import logger from "./config/logger";
 import { HttpError } from "http-errors";
 import cors from "cors";
@@ -18,7 +14,7 @@ app.use(
     cors({
         origin: Config.FRONTEND_DOMAIN,
         credentials: true,
-    }),
+    })
 );
 
 // handeling global rate limiter
@@ -38,20 +34,13 @@ app.use("/api/v1/events", limiter);
 app.use("/api/v1/events", eventRoute);
 
 // global error handler
-app.use(
-    (
-        err: HttpError,
-        req: Request,
-        res: Response,
-        next: NextFunction,
-    ) => {
-        logger.error(err.message);
-        const statusCode = err.statusCode || 500;
-        res.status(statusCode).json({
-            success: false,
-            msg: err.message,
-        });
-    },
-);
+app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
+    logger.error(err.message);
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode).json({
+        success: false,
+        msg: err.message,
+    });
+});
 
 export default app;
