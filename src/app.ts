@@ -19,10 +19,10 @@ app.use(
 
 // handeling global rate limiter
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 mins
-    limit: 10,
+    windowMs: 46 * 60 * 1000, // 46 mins
+    limit: 5,
     message:
-        "Too many request from this IP ,please try later.Only 10 request per 15 min are allowed",
+        "Too many request from this IP ,please try later.Only 5 request per 46 min are allowed",
 });
 
 app.get("/", (req: Request, res: Response) => {
