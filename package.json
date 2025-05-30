@@ -1,11 +1,11 @@
 {
   "name": "event_backend",
   "version": "1.0.0",
-  "main": "dist/src/server.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "build": "tsc -p .",
-    "start": "node dist/src/server.js",
+    "start": "node ./dist/server.js",
     "dev": "nodemon --exec tsx src/server.ts",
     "format:fix": "npx prettier . --write",
     "format:check": "npx prettier . --check",
