@@ -9,13 +9,11 @@ import logger from "../config/logger";
 const getEventDetails = async (
     req: Request,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
 ) => {
     try {
         console.log("req.body", req.body);
-        const isValidRequest = searchParaZodSchema.parse(
-            req.body,
-        );
+        const isValidRequest = searchParaZodSchema.parse(req.body);
         const { searchPara } = isValidRequest;
 
         const json = await new Promise((resolve) => {
@@ -33,8 +31,8 @@ const getEventDetails = async (
                         return next(
                             createHttpError(
                                 500,
-                                "No data received from SerpAPI",
-                            ),
+                                "No data received from SerpAPI"
+                            )
                         );
                     }
 
@@ -47,71 +45,52 @@ const getEventDetails = async (
                             errorMessage.includes("429") ||
                             errorMessage
                                 .toLowerCase()
-                                .includes(
-                                    "too many requests",
-                                )
+                                .includes("too many requests")
                         ) {
                             return next(
                                 createHttpError(
                                     429,
-                                    "Too many requests. Please try again later.",
-                                ),
+                                    "Too many requests. Please try again later."
+                                )
                             );
                         }
 
                         if (
                             errorMessage.includes("401") ||
-                            errorMessage
-                                .toLowerCase()
-                                .includes("unauthorized")
+                            errorMessage.toLowerCase().includes("unauthorized")
                         ) {
                             return next(
                                 createHttpError(
                                     401,
-                                    "Invalid API key or unauthorized access",
-                                ),
+                                    "Invalid API key or unauthorized access"
+                                )
                             );
                         }
 
                         if (
                             errorMessage.includes("400") ||
-                            errorMessage
-                                .toLowerCase()
-                                .includes("bad request")
+                            errorMessage.toLowerCase().includes("bad request")
                         ) {
                             return next(
-                                createHttpError(
-                                    400,
-                                    "Bad request parameters",
-                                ),
+                                createHttpError(400, "Bad request parameters")
                             );
                         }
 
                         if (
                             errorMessage.includes("403") ||
-                            errorMessage
-                                .toLowerCase()
-                                .includes("forbidden")
+                            errorMessage.toLowerCase().includes("forbidden")
                         ) {
                             return next(
-                                createHttpError(
-                                    403,
-                                    "Forbidden access",
-                                ),
+                                createHttpError(403, "Forbidden access")
                             );
                         }
 
                         if (
                             errorMessage.includes("404") ||
-                            errorMessage
-                                .toLowerCase()
-                                .includes("not found")
+                            errorMessage.toLowerCase().includes("not found")
                         ) {
                             return next(
-                                createHttpError(
-                                    404,
-                                    "Resource not found",
-                                ),
+                                createHttpError(404, "Resource not found")
                             );
                         }
 
@@ -119,15 +98,10 @@ const getEventDetails = async (
                             errorMessage.includes("500") ||
                             errorMessage
                                 .toLowerCase()
-                                .includes(
-                                    "internal server error",
-                                )
+                                .includes("internal server error")
                         ) {
                             return next(
-                                createHttpError(
-                                    502,
-                                    "SerpAPI server error",
-                                ),
+                                createHttpError(502, "SerpAPI server error")
                             );
                         }
 
@@ -135,14 +109,14 @@ const getEventDetails = async (
                         return next(
                             createHttpError(
                                 500,
-                                `SerpAPI Error: ${errorMessage}`,
-                            ),
+                                `SerpAPI Error: ${errorMessage}`
+                            )
                         );
                     }
 
                     // Success case
                     resolve(data["events_results"]);
-                },
+                }
             );
         });
 
@@ -161,17 +135,12 @@ const getEventDetails = async (
                         type: "Validation error",
                         zodError: error.errors,
                     },
-                }),
+                })
             );
         }
         // Handle generic errors
-        logger.error(
-            "Unexpected error in getEventDetails:",
-            error,
-        );
-        return next(
-            createHttpError(500, "Internal server error"),
-        );
+        logger.error("Unexpected error in getEventDetails:", error);
+        return next(createHttpError(500, "Internal server error"));
     }
 };
 
